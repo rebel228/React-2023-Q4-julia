@@ -3,8 +3,8 @@ import { SearchStateType } from './types';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 
-export default class SearchApp extends Component<SearchStateType> {
-  state = {
+export default class SearchApp extends Component {
+  state: SearchStateType = {
     fetchedData: {
       results: [],
     },
