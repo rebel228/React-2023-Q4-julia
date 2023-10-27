@@ -1,5 +1,11 @@
+import SearchApp from './search';
+
 function App() {
-  return <div className="App">Hello World!</div>;
+  return (
+    <>
+      <SearchApp />
+    </>
+  );
 }
 
 export default App;
