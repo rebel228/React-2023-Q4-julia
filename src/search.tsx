@@ -18,12 +18,9 @@ export default class SearchApp extends Component {
       .then((fetchedData) => {
         this.setState({ fetchedData });
         this.setState({ loading: false });
+        localStorage.setItem('search', word);
       });
   };
-
-  //   componentDidMount() {
-
-  //   }
 
   render() {
     const { fetchedData } = this.state;

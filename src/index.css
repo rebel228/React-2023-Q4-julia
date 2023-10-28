@@ -5,6 +5,8 @@ body,
   min-height: 100vh;
   height: 100%;
   margin: 0;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -41,7 +43,6 @@ body,
 .button {
   border-radius: 45px;
   background-color: rgb(175, 205, 218);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
   border: none;
 }

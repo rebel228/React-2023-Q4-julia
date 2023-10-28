@@ -9,25 +9,32 @@ export default class SearchBar extends Component<
     super(props);
 
     this.state = {
-      value: '',
+      word: '',
     };
+  }
+
+  componentDidMount() {
+    const localStorageSearch = localStorage.getItem('search');
+    if (localStorageSearch) {
+      this.setState({ word: localStorageSearch });
+    }
   }
   render() {
     return (
       <div className="top">
         <input
-          value={this.state.value}
+          value={this.state.word}
           className="input"
           placeholder="search..."
           onChange={(event) => {
-            this.setState({ value: event.target.value });
+            this.setState({ word: event.target.value });
           }}
         />
         <button
           className="button"
-          onClick={() => this.props.search(this.state.value)}
+          onClick={() => this.props.search(this.state.word)}
         >
-          <img className="img-search" src="./public/loupe.svg"></img>
+          <img className="img-search" src="./loupe.svg"></img>
         </button>
       </div>
     );
