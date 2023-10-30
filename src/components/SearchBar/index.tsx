@@ -32,7 +32,7 @@ export default class SearchBar extends Component<
         />
         <button
           className="button"
-          onClick={() => this.props.search(this.state.word)}
+          onClick={() => this.props.search(this.state.word.trim())}
         >
           <img className="img-search" src="./loupe.svg"></img>
         </button>

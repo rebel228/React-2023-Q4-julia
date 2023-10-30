@@ -1,11 +1,7 @@
 import SearchApp from './search';
 
 function App() {
-  return (
-    <>
-      <SearchApp />
-    </>
-  );
+  return <SearchApp />;
 }
 
 export default App;

@@ -3,6 +3,7 @@ export type SearchStateType = {
     results: Person[];
   };
   loading: boolean;
+  error?: Error;
 };
 
 export interface Person {

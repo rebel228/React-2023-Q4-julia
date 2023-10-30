@@ -1,5 +1,6 @@
 .loader {
   width: 50px;
+  margin-top: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 8px solid black;
