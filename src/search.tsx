@@ -11,7 +11,6 @@ export default class SearchApp extends Component {
     loading: false,
     error: undefined,
   };
-
   search = (word: string) => {
     this.setState({ loading: true });
     fetch(`https://swapi.dev/api/people?page=1${word ? `&search=${word}` : ''}`)
