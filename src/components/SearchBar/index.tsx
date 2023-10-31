@@ -14,10 +14,12 @@ export default class SearchBar extends Component<
   }
 
   componentDidMount() {
-    this.props.search(this.state.word.trim());
     const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
       this.setState({ word: localStorageSearch });
+      this.props.search(localStorageSearch);
+    } else {
+      this.props.search(this.state.word.trim());
     }
   }
   render() {
