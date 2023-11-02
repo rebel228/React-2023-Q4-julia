@@ -1,45 +1,35 @@
-import { Component } from 'react';
-import { SearchBarPropsType, SearchBarStateType } from './types';
+import { useEffect, useState } from 'react';
+import { SearchBarPropsType } from './types';
 
-export default class SearchBar extends Component<
-  SearchBarPropsType,
-  SearchBarStateType
-> {
-  constructor(props: SearchBarPropsType) {
-    super(props);
+export default function SearchBar(props: SearchBarPropsType) {
+  const [word, setWord] = useState<string>('');
 
-    this.state = {
-      word: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
-      this.setState({ word: localStorageSearch });
-      this.props.search(localStorageSearch);
+      setWord(localStorageSearch);
+      props.search(localStorageSearch);
     } else {
-      this.props.search(this.state.word.trim());
+      props.search(word.trim());
     }
-  }
-  render() {
-    return (
-      <div className="top">
-        <input
-          value={this.state.word}
-          className="input"
-          placeholder="search..."
-          onChange={(event) => {
-            this.setState({ word: event.target.value });
-          }}
-        />
-        <button
-          className="button"
-          onClick={() => this.props.search(this.state.word.trim())}
-        >
-          <img className="img-search" src="./loupe.svg"></img>
-        </button>
-      </div>
-    );
-  }
+  });
+  const handleSetWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWord(e.target.value);
+  };
+
+  return (
+    <div className="top">
+      <input
+        value={word}
+        className="input"
+        placeholder="search..."
+        onChange={() => {
+          handleSetWord;
+        }}
+      />
+      <button className="button" onClick={() => props.search(word.trim())}>
+        <img className="img-search" src="./loupe.svg"></img>
+      </button>
+    </div>
+  );
 }

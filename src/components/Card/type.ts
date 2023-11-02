@@ -1,6 +1,6 @@
 import { Person } from '../../types';
 
-export type CardSearchPropsType = {
+export type CardSearchType = {
   person: Person;
   key: number;
 };

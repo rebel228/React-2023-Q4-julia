@@ -1,11 +1,3 @@
-export type SearchStateType = {
-  fetchedData: {
-    results: Person[];
-  };
-  loading: boolean;
-  error?: Error;
-};
-
 export interface Person {
   name: string;
   height: string;
