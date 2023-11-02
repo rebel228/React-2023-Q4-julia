@@ -14,6 +14,7 @@ export default function SearchApp() {
       .then((fetchedData) => {
         setResults(fetchedData.results);
         setError(false);
+        setLoading(false);
         localStorage.setItem('search', word);
       })
       .catch((error: Error) => {

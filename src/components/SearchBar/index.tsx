@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { SearchBarPropsType } from './types';
 
 export default function SearchBar(props: SearchBarPropsType) {
   const [word, setWord] = useState<string>('');
 
-  useEffect(() => {
+  const { search } = props;
+
+  const initialSearch = useCallback(() => {
     const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
       setWord(localStorageSearch);
-      props.search(localStorageSearch);
+      search(localStorageSearch);
     } else {
-      props.search(word.trim());
+      search(word.trim());
     }
-  });
-  const handleSetWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWord(e.target.value);
-  };
+  }, []);
+
+  useEffect(() => {
+    initialSearch();
+  }, [initialSearch]);
 
   return (
     <div className="top">
@@ -23,8 +26,8 @@ export default function SearchBar(props: SearchBarPropsType) {
         value={word}
         className="input"
         placeholder="search..."
-        onChange={() => {
-          handleSetWord;
+        onChange={(e) => {
+          setWord(e.target.value);
         }}
       />
       <button className="button" onClick={() => props.search(word.trim())}>
