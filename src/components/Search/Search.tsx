@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import SearchBar from './components/SearchBar';
-import SearchResults from './components/SearchResults';
+import SearchBar from '../SearchBar';
+import SearchResults from '../SearchResults';
 
-export default function SearchApp() {
+export default function Search() {
   const [results, setResults] = useState();
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<Error | boolean>();

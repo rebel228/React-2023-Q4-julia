@@ -1,7 +1,7 @@
-import SearchApp from './search';
+import RoutingApp from './services/routing';
 
 function App() {
-  return <SearchApp />;
+  return <RoutingApp />;
 }
 
 export default App;
