@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
 import SearchResults from '../SearchResults';
 import Pagination from '../Pagination';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 export default function Search() {
   const [results, setResults] = useState();
@@ -11,6 +11,7 @@ export default function Search() {
   const [searchedWord, setSearchedWord] = useState<string>('');
   const [totalProducts, setTotalProducts] = useState<number>(0);
   const { page: pageFromURL } = useParams();
+  const [numbersPerPage, setNumbersPerPage] = useState<number>(10);
 
   const search = (word?: string, page?: number) => {
     let w: string;
@@ -21,7 +22,7 @@ export default function Search() {
     fetch(
       `https://dummyjson.com/products${
         w ? `/search?q=${w}&` : '?'
-      }limit=10&skip=${(p - 1) * 10}`
+      }limit=${numbersPerPage}&skip=${(p - 1) * 10}`
     )
       .then((res) => res.json())
       .then((fetchedData) => {
@@ -46,17 +47,27 @@ export default function Search() {
     } else {
       search();
     }
-  }, [pageFromURL]);
+  }, [pageFromURL, numbersPerPage]);
 
   return (
-    <div className="container">
-      <SearchBar
-        search={search}
-        setWord={setSearchedWord}
-        word={searchedWord}
-      />
-      <SearchResults results={results} loading={loading} error={error} />
-      {!loading && results && <Pagination totalProducts={totalProducts} />}
+    <div className="wrapper">
+      <div className="container">
+        <SearchBar
+          search={search}
+          setWord={setSearchedWord}
+          word={searchedWord}
+        />
+        <SearchResults results={results} loading={loading} error={error} />
+        {!loading && results && (
+          <Pagination
+            totalProducts={totalProducts}
+            setNumbersPerPage={setNumbersPerPage}
+            numbersPerPage={numbersPerPage}
+          />
+        )}
+      </div>
+
+      <Outlet />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function SearchBar(props: SearchBarPropsType) {
           search();
         }}
       >
-        <img className="img-search" src="./loupe.svg"></img>
+        <img className="img-search" src="/loupe.svg" />
       </button>
     </div>
   );
