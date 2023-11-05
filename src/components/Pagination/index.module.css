@@ -1,0 +1,30 @@
+.pagination {
+  position: relative;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.432);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  margin: 0;
+}
+.pagination li {
+  list-style-type: none;
+  display: inline-block;
+  position: relative;
+  padding: 20px 25px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pagination li.btn_disable {
+  color: grey;
+  pointer-events: none;
+}
+
+.pagination li:hover,
+.pagination li.active {
+  background: rgba(255, 255, 255, 0.2);
+}

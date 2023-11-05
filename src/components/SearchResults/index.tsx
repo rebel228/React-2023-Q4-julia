@@ -1,4 +1,4 @@
-import { Person } from '../../types';
+import { Product } from '../../types';
 import Loader from '../Loader';
 import Card from '../Card';
 import styles from './index.module.css';
@@ -15,8 +15,8 @@ export default function SearchResults(props: SearchResultsPropsType) {
         <>
           {props.results && (
             <div className={styles.cards_container}>
-              {props.results.map((person: Person, index: number) => (
-                <Card key={index} person={person} />
+              {props.results.map((product: Product, index: number) => (
+                <Card key={index} product={product} />
               ))}
             </div>
           )}

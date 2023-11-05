@@ -4,4 +4,5 @@ export type SearchResultsPropsType = {
   results?: Person[];
   loading?: boolean;
   error?: Error | boolean;
+  page?: number;
 };

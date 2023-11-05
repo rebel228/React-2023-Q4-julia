@@ -1,6 +1,6 @@
-import { Person } from '../../types';
+import { Product } from '../../types';
 
 export type CardSearchType = {
-  person: Person;
+  product: Product;
   key: number;
 };

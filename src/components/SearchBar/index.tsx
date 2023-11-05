@@ -1,24 +1,9 @@
-import { useEffect, useState, useCallback } from 'react';
 import { SearchBarPropsType } from './types';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchBar(props: SearchBarPropsType) {
-  const [word, setWord] = useState<string>('');
-
-  const { search } = props;
-
-  const initialSearch = useCallback(() => {
-    const localStorageSearch = localStorage.getItem('search');
-    if (localStorageSearch) {
-      setWord(localStorageSearch);
-      search(localStorageSearch);
-    } else {
-      search(word.trim());
-    }
-  }, []);
-
-  useEffect(() => {
-    initialSearch();
-  }, [initialSearch]);
+  const { search, setWord, word } = props;
+  const navigate = useNavigate();
 
   return (
     <div className="top">
@@ -30,7 +15,13 @@ export default function SearchBar(props: SearchBarPropsType) {
           setWord(e.target.value);
         }}
       />
-      <button className="button" onClick={() => props.search(word.trim())}>
+      <button
+        className="button"
+        onClick={() => {
+          navigate('/1');
+          search();
+        }}
+      >
         <img className="img-search" src="./loupe.svg"></img>
       </button>
     </div>
