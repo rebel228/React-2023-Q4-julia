@@ -1,7 +1,7 @@
-import { Person } from '../../types';
+import { Product } from '../../types';
 
 export type SearchResultsPropsType = {
-  results?: Person[];
+  results?: Product[];
   loading?: boolean;
   error?: Error | boolean;
   page?: number;
