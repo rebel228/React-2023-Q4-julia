@@ -3,13 +3,22 @@ import SearchBar from '../SearchBar';
 import SearchResults from '../SearchResults';
 import Pagination from '../Pagination';
 import { Outlet, useParams } from 'react-router-dom';
+import { useSearchContext } from '../../Contexts/searchContext';
 
 export default function Search() {
-  const [results, setResults] = useState();
-  const [loading, setLoading] = useState<boolean>();
-  const [error, setError] = useState<Error | boolean>();
+  const {
+    results,
+    setResults,
+    loading,
+    setLoading,
+    error,
+    setError,
+    // totalProducts,
+    // setTotalProducts
+  } = useSearchContext();
   const [searchedWord, setSearchedWord] = useState<string>('');
   const [totalProducts, setTotalProducts] = useState<number>(0);
+
   const { page: pageFromURL } = useParams();
   const [numbersPerPage, setNumbersPerPage] = useState<number>(10);
 
@@ -47,6 +56,7 @@ export default function Search() {
     } else {
       search();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageFromURL, numbersPerPage]);
 
   return (
