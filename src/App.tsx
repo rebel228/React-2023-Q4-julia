@@ -7,7 +7,9 @@ import { Product } from './types';
 function App() {
   const [results, setResults] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>();
-  const [error, setError] = useState<Error | boolean>();
+  const [error, setError] = useState<string>();
+  const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [numbersPerPage, setNumbersPerPage] = useState<number>(10);
 
   return (
     <div>
@@ -19,8 +21,10 @@ function App() {
           setLoading,
           error,
           setError,
-          // totalProducts,
-          // setTotalProducts
+          totalProducts,
+          setTotalProducts,
+          numbersPerPage,
+          setNumbersPerPage,
         }}
       >
         <RoutingApp />

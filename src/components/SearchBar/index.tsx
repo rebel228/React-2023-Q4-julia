@@ -1,18 +1,66 @@
-import { SearchBarPropsType } from './types';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSearchContext } from '../../Contexts/searchContext';
+import { getProducts } from '../../api';
 
-export default function SearchBar(props: SearchBarPropsType) {
-  const { search, setWord, word } = props;
+export default function SearchBar() {
+  const [searchedWord, setSearchedWord] = useState<string>('');
+  const [isFirstSearch, setIsFirstSearch] = useState<boolean>(true);
   const navigate = useNavigate();
+  const { page: pageFromURL } = useParams();
+  const { setLoading, numbersPerPage, setResults, setTotalProducts, setError } =
+    useSearchContext();
+
+  const search = () => {
+    setLoading(true);
+    if (pageFromURL) {
+      getProducts(numbersPerPage, searchedWord, +pageFromURL)
+        .then((fetchedData) => {
+          setResults(fetchedData.products);
+          setTotalProducts(fetchedData.total);
+          setLoading(false);
+          localStorage.setItem('search', searchedWord);
+        })
+        .catch((error: Error) => {
+          setLoading(false);
+          setError(error.message);
+          throw new Error(JSON.stringify(error));
+        });
+    }
+  };
+
+  useEffect(() => {
+    const localStorageSearch = localStorage.getItem('search');
+    if (localStorageSearch) {
+      setSearchedWord(localStorageSearch);
+      navigate('/1');
+    } else {
+      search();
+      setIsFirstSearch(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (searchedWord !== '' && isFirstSearch) {
+      search();
+      setIsFirstSearch(false);
+    }
+  }, [searchedWord]);
+
+  useEffect(() => {
+    if (!isFirstSearch) {
+      search();
+    }
+  }, [pageFromURL, numbersPerPage]);
 
   return (
     <div className="top">
       <input
-        value={word}
+        value={searchedWord}
         className="input"
         placeholder="search..."
         onChange={(e) => {
-          setWord(e.target.value);
+          setSearchedWord(e.target.value);
         }}
       />
       <button

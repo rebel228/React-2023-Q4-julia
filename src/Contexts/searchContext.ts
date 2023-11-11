@@ -6,8 +6,12 @@ export const SearchContext = createContext<SearchResultsContextType>({
   setResults: () => {},
   loading: false,
   setLoading: () => {},
-  //   error: false,
+  error: '',
   setError: () => {},
+  totalProducts: 0,
+  setTotalProducts: () => {},
+  numbersPerPage: 10,
+  setNumbersPerPage: () => {},
 });
 
 export const useSearchContext = () => useContext(SearchContext);

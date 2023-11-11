@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import styles from './index.module.css';
-import { PaginationPropsType } from './types';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../../Contexts/searchContext';
 
-export default function Pagination(props: PaginationPropsType) {
+export default function Pagination() {
   const [pages, setPages] = useState<number[]>([]);
-  const { totalProducts, setNumbersPerPage, numbersPerPage } = props;
+  const { totalProducts, setNumbersPerPage, numbersPerPage } =
+    useSearchContext();
 
   const { page: pageFromURL } = useParams();
   const navigate = useNavigate();

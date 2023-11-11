@@ -4,23 +4,25 @@ import Card from '../Card';
 import styles from './index.module.css';
 import ErrorInfo from '../ErrorBoundary/ErrorInfo';
 import ShowErrorInfo from '../ErrorBoundary/ShowErrorInfo';
-import { SearchResultsPropsType } from './types';
+import { useSearchContext } from '../../Contexts/searchContext';
 
-export default function SearchResults(props: SearchResultsPropsType) {
+export default function SearchResults() {
+  const { loading, results, error } = useSearchContext();
+
   return (
     <div className="bottom">
-      {props.loading ? (
+      {loading ? (
         <Loader />
       ) : (
         <>
-          {props.results && (
+          {results && (
             <div className={styles.cards_container}>
-              {props.results.map((product: Product, index: number) => (
+              {results.map((product: Product, index: number) => (
                 <Card key={index} product={product} />
               ))}
             </div>
           )}
-          {props.error && <ErrorInfo />}
+          {error && <ErrorInfo />}
         </>
       )}
       <ShowErrorInfo />

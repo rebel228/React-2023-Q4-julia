@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Product } from '../../types';
+import { getDetailedProduct } from '../../api';
 
 export default function Details() {
   const [searchParams] = useSearchParams();
@@ -9,17 +10,12 @@ export default function Details() {
   const navigate = useNavigate();
   const { page: pageFromURL } = useParams();
 
-  const getDetailedProduct = () => {
-    fetch(`https://dummyjson.com/products/${searchParams.get('id')}`)
-      .then((res) => res.json())
-      .then((fetchedData) => {
+  useEffect(() => {
+    if (searchParams.get('id')) {
+      getDetailedProduct(searchParams.get('id')).then((fetchedData) => {
         setData(fetchedData);
       });
-  };
-
-  useEffect(() => {
-    getDetailedProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
   }, [searchParams]);
 
   return (

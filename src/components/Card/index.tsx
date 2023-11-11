@@ -2,13 +2,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './index.module.css';
 import { CardSearchType } from './type';
 
-export default function Card(props: CardSearchType) {
+export default function Card({ product }: CardSearchType) {
   const navigate = useNavigate();
   const { page: pageFromURL } = useParams();
-  const { product } = props;
   return (
     <div
       className={styles.card}
+      role="div"
       onClick={() => {
         navigate(`/${pageFromURL}/product?id=${product.id}`);
       }}
