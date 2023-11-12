@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSearchContext } from '../../Contexts/searchContext';
 import { getProducts } from '../../api';
+import { testids } from '../../constants/testids';
 
 export default function SearchBar() {
   const [searchedWord, setSearchedWord] = useState<string>('');
@@ -24,7 +25,6 @@ export default function SearchBar() {
         .catch((error: Error) => {
           setLoading(false);
           setError(error.message);
-          throw new Error(JSON.stringify(error));
         });
     }
   };
@@ -56,6 +56,7 @@ export default function SearchBar() {
   return (
     <div className="top">
       <input
+        data-testid={testids.searchInput}
         value={searchedWord}
         className="input"
         placeholder="search..."

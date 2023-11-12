@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Card from '../Card';
-import { Product } from '../../types';
+import Card from '../components/Card';
+import { Product } from '../types';
 
 const mockUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({

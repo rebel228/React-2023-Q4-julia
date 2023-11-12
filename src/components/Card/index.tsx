@@ -8,7 +8,7 @@ export default function Card({ product }: CardSearchType) {
   return (
     <div
       className={styles.card}
-      role="div"
+      role="card"
       onClick={() => {
         navigate(`/${pageFromURL}/product?id=${product.id}`);
       }}

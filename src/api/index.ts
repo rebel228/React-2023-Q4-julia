@@ -13,7 +13,11 @@ export async function getProducts(
 }
 
 export async function getDetailedProduct(id: string | null) {
-  const response = await fetch(`https://dummyjson.com/products/${id}`);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${id}`);
+    const data = await response.json();
+    return data;
+  } catch {
+    return null;
+  }
 }

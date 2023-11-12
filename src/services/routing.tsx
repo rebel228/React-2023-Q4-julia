@@ -1,11 +1,12 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Search from '../components/Search';
 import Details from '../components/Details';
+import InvalidRoute from '../components/404';
 
 function RoutingApp() {
   return (
     <Routes>
-      <Route path="*" element={<p>not found</p>} />
+      <Route path="*" element={<InvalidRoute />} />
       <Route path="/:page" element={<Search />}>
         <Route path="product" element={<Details />} />
       </Route>

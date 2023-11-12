@@ -19,7 +19,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "jest --findRelatedTests --bail"
     ]
   },
   "dependencies": {

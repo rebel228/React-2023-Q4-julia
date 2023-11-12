@@ -1,11 +1,15 @@
 import RoutingApp from './services/routing';
-
 import { SearchContext } from './Contexts/searchContext';
 import { useState } from 'react';
 import { Product } from './types';
 
-function App() {
-  const [results, setResults] = useState<Product[]>([]);
+function App({
+  results,
+  setResults,
+}: {
+  results: Product[];
+  setResults: (results: Product[]) => void;
+}) {
   const [loading, setLoading] = useState<boolean>();
   const [error, setError] = useState<string>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
