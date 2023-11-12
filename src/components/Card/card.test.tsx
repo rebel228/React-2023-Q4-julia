@@ -1,6 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Card from '../Card';
+import { Product } from '../../types';
 
 const mockUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -9,7 +10,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 test('should render card component', () => {
-  const product = {
+  const product: Product = {
     title: 'iPhone 9',
     id: 2,
     description: 'An apple mobile which is nothing like apple',
@@ -20,12 +21,13 @@ test('should render card component', () => {
     brand: 'Apple',
     category: 'smartphones',
     thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
+    images: [
+      'https://i.dummyjson.com/data/products/1/1.jpg',
+      'https://i.dummyjson.com/data/products/1/2.jpg',
+    ],
   };
-  const index = 0;
-  //   render(<Card key={index} product={product} />);
-  //   const cardElement = screen.getByRole('div');
-  //     expect(cardElement).toBeInTheDocument();
-  render(<Card key={index} product={product} />);
+
+  render(<Card product={product} />);
   const cardElement = screen.getByText('iPhone 9');
   expect(cardElement).toBeInTheDocument();
 });

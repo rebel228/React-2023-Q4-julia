@@ -15,12 +15,14 @@ export default function SearchResults() {
         <Loader />
       ) : (
         <>
-          {results && (
+          {results && results.length > 0 ? (
             <div className={styles.cards_container}>
               {results.map((product: Product, index: number) => (
                 <Card key={index} product={product} />
               ))}
             </div>
+          ) : (
+            <p>No results</p>
           )}
           {error && <ErrorInfo />}
         </>

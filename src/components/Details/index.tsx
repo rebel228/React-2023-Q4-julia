@@ -19,7 +19,7 @@ export default function Details() {
   }, [searchParams]);
 
   return (
-    <div className={styles.detailed_card_container}>
+    <div className={styles.detailed_card_container} role="detailed-card">
       <button
         className={styles.close}
         onClick={() => {

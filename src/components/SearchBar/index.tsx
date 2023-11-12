@@ -12,6 +12,7 @@ export default function SearchBar() {
     useSearchContext();
 
   const search = () => {
+    localStorage.setItem('search', searchedWord);
     setLoading(true);
     if (pageFromURL) {
       getProducts(numbersPerPage, searchedWord, +pageFromURL)
@@ -19,7 +20,6 @@ export default function SearchBar() {
           setResults(fetchedData.products);
           setTotalProducts(fetchedData.total);
           setLoading(false);
-          localStorage.setItem('search', searchedWord);
         })
         .catch((error: Error) => {
           setLoading(false);
@@ -69,6 +69,7 @@ export default function SearchBar() {
           navigate('/1');
           search();
         }}
+        role="search-button"
       >
         <img className="img-search" src="/loupe.svg" />
       </button>
