@@ -21,7 +21,7 @@ const product: Product = {
   ],
 };
 
-test.only('clicking close button hides the component', async () => {
+test('clicking close button hides the component', async () => {
   const { getByText, getByRole } = render(
     <Router>
       <App results={[product]} setResults={() => null} />
