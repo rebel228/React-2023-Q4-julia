@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router';
 import RoutingApp from '../services/routing';
 
-test('should render card component', () => {
+test('should render error', () => {
   const badRoute = '/bad/route';
 
   render(

@@ -3,9 +3,16 @@ import SearchBar from '../components/SearchBar';
 import { fireEvent, render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { testids } from '../constants/testids';
+import { PropsWithChildren } from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 const testInputValue = 'test';
 const mockLocalStorage: Record<string, string> = {};
+
+function Wrapper({ children }: PropsWithChildren): JSX.Element {
+  return <Provider store={store}>{children}</Provider>;
+}
 
 beforeEach(() => {
   Object.defineProperty(window, 'localStorage', {
@@ -19,9 +26,11 @@ beforeEach(() => {
 
 test('search button saves the entered value to the local storage', async () => {
   const { getByRole, getByTestId } = render(
-    <Router>
-      <SearchBar />
-    </Router>
+    <Wrapper>
+      <Router>
+        <SearchBar />
+      </Router>
+    </Wrapper>
   );
   const searchInput = getByTestId(testids.searchInput) as HTMLInputElement;
   fireEvent.change(searchInput, { target: { value: testInputValue } });
@@ -35,9 +44,11 @@ test('search button saves the entered value to the local storage', async () => {
 test('component retrieves the value from the local storage upon mounting', async () => {
   window.localStorage.getItem = () => testInputValue;
   const { getByTestId } = render(
-    <Router>
-      <SearchBar />
-    </Router>
+    <Wrapper>
+      <Router>
+        <SearchBar />
+      </Router>
+    </Wrapper>
   );
   const searchInput = getByTestId(testids.searchInput) as HTMLInputElement;
 
