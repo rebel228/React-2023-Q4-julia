@@ -1,24 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSearchContext } from '../../Contexts/searchContext';
 import { getProducts } from '../../api';
 import { testids } from '../../constants/testids';
+import { useAppSelector } from '../../hooks/redux';
+import { useActions } from '../../hooks/actions';
 
 export default function SearchBar() {
-  const [searchedWord, setSearchedWord] = useState<string>('');
   const [isFirstSearch, setIsFirstSearch] = useState<boolean>(true);
   const navigate = useNavigate();
   const { page: pageFromURL } = useParams();
-  const { setLoading, numbersPerPage, setResults, setTotalProducts, setError } =
-    useSearchContext();
+  const searchedWord = useAppSelector((state) => state.search.searchedWord);
+  const numbersPerPage = useAppSelector((state) => state.search.numbersPerPage);
+  const {
+    setLoading,
+    setResults,
+    setTotalProducts,
+    setError,
+    setSearchedWord,
+  } = useActions();
 
   const search = () => {
     localStorage.setItem('search', searchedWord);
     setLoading(true);
     if (pageFromURL) {
-      getProducts(numbersPerPage, searchedWord, +pageFromURL)
+      getProducts(numbersPerPage, searchedWord, Number(pageFromURL))
         .then((fetchedData) => {
           setResults(fetchedData.products);
+
           setTotalProducts(fetchedData.total);
           setLoading(false);
         })

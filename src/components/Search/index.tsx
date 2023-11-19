@@ -2,10 +2,11 @@ import SearchBar from '../SearchBar';
 import SearchResults from '../SearchResults';
 import Pagination from '../Pagination';
 import { Outlet } from 'react-router-dom';
-import { useSearchContext } from '../../Contexts/searchContext';
+import { useAppSelector } from '../../hooks/redux';
 
 export default function Search() {
-  const { results, loading } = useSearchContext();
+  const results = useAppSelector((state) => state.search.results);
+  const loading = useAppSelector((state) => state.search.loading);
 
   return (
     <div className="wrapper">

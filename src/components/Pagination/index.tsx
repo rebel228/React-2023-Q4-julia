@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './index.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSearchContext } from '../../Contexts/searchContext';
+import { useAppSelector } from '../../hooks/redux';
+import { useActions } from '../../hooks/actions';
 
 export default function Pagination() {
   const [pages, setPages] = useState<number[]>([]);
-  const { totalProducts, setNumbersPerPage, numbersPerPage } =
-    useSearchContext();
-
+  const totalProducts = useAppSelector((state) => state.search.totalProducts);
+  const numbersPerPage = useAppSelector((state) => state.search.numbersPerPage);
   const { page: pageFromURL } = useParams();
   const navigate = useNavigate();
+  const { setNumbersPerPage } = useActions();
 
   const changeNumbersPerPage = (number: number) => {
     setNumbersPerPage(number);

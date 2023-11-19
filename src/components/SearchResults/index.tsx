@@ -4,10 +4,12 @@ import Card from '../Card';
 import styles from './index.module.css';
 import ErrorInfo from '../ErrorBoundary/ErrorInfo';
 import ShowErrorInfo from '../ErrorBoundary/ShowErrorInfo';
-import { useSearchContext } from '../../Contexts/searchContext';
+import { useAppSelector } from '../../hooks/redux';
 
 export default function SearchResults() {
-  const { loading, results, error } = useSearchContext();
+  const results = useAppSelector((state) => state.search.results);
+  const loading = useAppSelector((state) => state.search.loading);
+  const error = useAppSelector((state) => state.search.error);
 
   return (
     <div className="bottom">
