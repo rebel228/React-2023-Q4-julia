@@ -1,4 +1,11 @@
-export interface Product {
+export interface IProducts {
+  products: IProduct[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export interface IProduct {
   id: number;
   title: string;
   description: string;
@@ -10,4 +17,10 @@ export interface Product {
   category: string;
   thumbnail: string;
   images?: string[] | null;
+}
+
+export interface IProductsQuery {
+  word: string;
+  numbersPerPage: number;
+  page: number;
 }

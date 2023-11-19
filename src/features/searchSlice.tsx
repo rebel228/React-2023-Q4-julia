@@ -1,19 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Product } from '../types';
 
 interface ISearchState {
-  results: Product[];
-  loading?: boolean;
-  error?: string;
+  loadingProducts?: boolean;
+  loadingProduct?: boolean;
   totalProducts: number;
   numbersPerPage: number;
   searchedWord: string;
 }
 
 const initialState: ISearchState = {
-  results: [],
-  loading: false,
-  error: '',
+  loadingProducts: true,
+  loadingProduct: true,
   totalProducts: 0,
   numbersPerPage: 10,
   searchedWord: localStorage.getItem('search') ?? '',
@@ -23,14 +20,11 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setResults: (state, action: PayloadAction<Product[]>) => {
-      state.results = action.payload;
+    setLoadingProducts: (state, action: PayloadAction<boolean>) => {
+      state.loadingProducts = action.payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
+    setLoadingProduct: (state, action: PayloadAction<boolean>) => {
+      state.loadingProduct = action.payload;
     },
     setTotalProducts: (state, action: PayloadAction<number>) => {
       state.totalProducts = action.payload;

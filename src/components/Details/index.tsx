@@ -1,25 +1,32 @@
 import { useEffect } from 'react';
 import styles from './index.module.css';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useLazyGetProductQuery } from '../../features/apiSlice';
+import { useGetProductQuery } from '../../features/apiSlice';
 import Loader from '../Loader';
+import { useActions } from '../../hooks/actions';
 
 export default function Details() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { page: pageFromURL } = useParams();
-  const [getProduct, { data: dataProduct, isLoading }] =
-    useLazyGetProductQuery();
+  const { setLoadingProduct } = useActions();
+  const {
+    data: dataProduct,
+    isLoading,
+    isFetching,
+  } = useGetProductQuery(searchParams.get('id'));
 
   useEffect(() => {
-    if (searchParams.get('id')) {
-      getProduct(searchParams.get('id'));
+    if (!isLoading && !isFetching) {
+      setLoadingProduct(false);
+    } else {
+      setLoadingProduct(true);
     }
-  }, [searchParams]);
+  }, [isLoading, isFetching]);
 
   return (
     <div className={styles.detailed_card_container} role="detailed-card">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <Loader />
       ) : (
         <>

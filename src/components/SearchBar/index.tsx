@@ -1,75 +1,36 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getProducts } from '../../api';
+import { useNavigate } from 'react-router-dom';
 import { testids } from '../../constants/testids';
 import { useAppSelector } from '../../hooks/redux';
 import { useActions } from '../../hooks/actions';
 
 export default function SearchBar() {
-  const [isFirstSearch, setIsFirstSearch] = useState<boolean>(true);
+  const [word, setWord] = useState<string>('');
   const navigate = useNavigate();
-  const { page: pageFromURL } = useParams();
   const searchedWord = useAppSelector((state) => state.search.searchedWord);
-  const numbersPerPage = useAppSelector((state) => state.search.numbersPerPage);
-  const {
-    setLoading,
-    setResults,
-    setTotalProducts,
-    setError,
-    setSearchedWord,
-  } = useActions();
+  const { setSearchedWord } = useActions();
 
-  const search = () => {
-    localStorage.setItem('search', searchedWord);
-    setLoading(true);
-    if (pageFromURL) {
-      getProducts(numbersPerPage, searchedWord, Number(pageFromURL))
-        .then((fetchedData) => {
-          setResults(fetchedData.products);
-
-          setTotalProducts(fetchedData.total);
-          setLoading(false);
-        })
-        .catch((error: Error) => {
-          setLoading(false);
-          setError(error.message);
-        });
-    }
+  const search = async () => {
+    setSearchedWord(word);
   };
 
   useEffect(() => {
+    setWord(searchedWord);
     const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
-      setSearchedWord(localStorageSearch);
       navigate('/1');
-    } else {
-      search();
-      setIsFirstSearch(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (searchedWord !== '' && isFirstSearch) {
-      search();
-      setIsFirstSearch(false);
-    }
-  }, [searchedWord]);
-
-  useEffect(() => {
-    if (!isFirstSearch) {
-      search();
-    }
-  }, [pageFromURL, numbersPerPage]);
 
   return (
     <div className="top">
       <input
         data-testid={testids.searchInput}
-        value={searchedWord}
+        value={word}
         className="input"
         placeholder="search..."
         onChange={(e) => {
-          setSearchedWord(e.target.value);
+          setWord(e.target.value);
         }}
       />
       <button

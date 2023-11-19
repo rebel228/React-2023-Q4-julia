@@ -1,5 +1,5 @@
-import { Product } from '../../types';
+import { IProduct } from '../../types';
 
 export type CardDetailsType = {
-  product?: Product;
+  product?: IProduct;
 };

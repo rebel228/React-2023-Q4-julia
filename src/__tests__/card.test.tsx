@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Card from '../components/Card';
-import { Product } from '../types';
+import { IProduct } from '../types';
 
 const mockUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 test('should render card component', () => {
-  const product: Product = {
+  const product: IProduct = {
     title: 'iPhone 9',
     id: 2,
     description: 'An apple mobile which is nothing like apple',

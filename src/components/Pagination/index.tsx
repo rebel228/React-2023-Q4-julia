@@ -8,8 +8,8 @@ export default function Pagination() {
   const [pages, setPages] = useState<number[]>([]);
   const totalProducts = useAppSelector((state) => state.search.totalProducts);
   const numbersPerPage = useAppSelector((state) => state.search.numbersPerPage);
-  const { page: pageFromURL } = useParams();
   const navigate = useNavigate();
+  const { page: pageFromURL } = useParams();
   const { setNumbersPerPage } = useActions();
 
   const changeNumbersPerPage = (number: number) => {
