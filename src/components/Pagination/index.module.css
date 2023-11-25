@@ -1,0 +1,43 @@
+.pagination {
+  position: relative;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.432);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  margin: 0;
+}
+.pagination li {
+  list-style-type: none;
+  display: inline-block;
+  position: relative;
+  padding: 15px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pagination li.btn_disable {
+  color: grey;
+  pointer-events: none;
+}
+
+.pagination li:hover,
+.pagination li.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.product_count {
+  color: white;
+  position: absolute;
+  right: 20px;
+}
+.product_count_btn {
+  background-color: rgb(170, 170, 170);
+  cursor: pointer;
+}
+.product_count_btn.active {
+  background-color: rgb(91, 139, 137);
+}
