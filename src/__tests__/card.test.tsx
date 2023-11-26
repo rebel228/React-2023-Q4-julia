@@ -132,7 +132,7 @@ test('close button to be in the detailed card', async () => {
   );
 
   await waitFor(() => {
-    const closeButton = getByText('close');
-    expect(closeButton).toBeInTheDocument();
+    const closeBtn = getByText('close');
+    expect(closeBtn).toBeInTheDocument();
   });
 });
