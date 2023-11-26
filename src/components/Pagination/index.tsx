@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import styles from "./index.module.css";
-import { useAppSelector } from "../../hooks/redux";
-import { useActions } from "../../hooks/actions";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import styles from './index.module.css';
+import { useAppSelector } from '../../hooks/redux';
+import { useActions } from '../../hooks/actions';
+import { useRouter } from 'next/router';
 
 export default function Pagination() {
   const [pages, setPages] = useState<number[]>([]);
@@ -13,7 +13,7 @@ export default function Pagination() {
 
   const changeNumbersPerPage = (number: number) => {
     setNumbersPerPage(number);
-    router.push("/products/1");
+    router.push('/products/1');
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Pagination() {
           className={
             router.query.page && +router.query.page === 1
               ? styles.btn_disable
-              : ""
+              : ''
           }
           onClick={() => {
             router.query.page &&
@@ -49,7 +49,7 @@ export default function Pagination() {
               className={
                 router.query.page && +router.query.page === page
                   ? styles.active
-                  : ""
+                  : ''
               }
               key={index}
               onClick={() => router.push(`/products/${page}`)}
@@ -61,7 +61,7 @@ export default function Pagination() {
           className={
             router.query.page && +router.query.page === pages[pages.length - 1]
               ? styles.btn_disable
-              : ""
+              : ''
           }
           onClick={() => {
             router.query.page &&

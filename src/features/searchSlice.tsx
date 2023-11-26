@@ -1,11 +1,11 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface ISearchState {
   loadingProducts?: boolean;
   loadingProduct?: boolean;
   totalProducts: number;
   numbersPerPage: number;
-  searchedWord: string | null;
+  searchedWord: string;
 }
 
 const initialState: ISearchState = {
@@ -14,11 +14,11 @@ const initialState: ISearchState = {
   totalProducts: 0,
   numbersPerPage: 10,
   searchedWord:
-    typeof window !== "undefined" ? localStorage.getItem("search") : "",
+    typeof window !== 'undefined' ? localStorage.getItem('search') ?? '' : '',
 };
 
 const searchSlice = createSlice({
-  name: "search",
+  name: 'search',
   initialState,
   reducers: {
     setLoadingProducts: (state, action: PayloadAction<boolean>) => {
@@ -35,8 +35,8 @@ const searchSlice = createSlice({
     },
     setSearchedWord: (state, action: PayloadAction<string>) => {
       state.searchedWord = action.payload;
-      if (typeof window !== "undefined")
-        localStorage.setItem("search", action.payload);
+      if (typeof window !== 'undefined')
+        localStorage.setItem('search', action.payload);
     },
   },
 });

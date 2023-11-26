@@ -1,9 +1,12 @@
-import Head from "next/head";
-import Pagination from "./Pagination";
-import SearchBar from "./SearchBar";
-import { ReactElement } from "react";
+import Head from 'next/head';
+import Pagination from './Pagination';
+import SearchBar from './SearchBar';
+import { ReactElement } from 'react';
+import { useRouter } from 'next/router';
+import Details from './Details';
 
 const Layout = ({ children }: { children: ReactElement }) => {
+  const { query } = useRouter();
   return (
     <>
       <Head>
@@ -16,6 +19,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
           <main>{children}</main>
           <Pagination />
         </div>
+        {query.id ? <Details /> : null}
       </div>
     </>
   );

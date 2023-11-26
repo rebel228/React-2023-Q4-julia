@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import styles from "./index.module.css";
-import { CardSearchType } from "./type";
+import { useRouter } from 'next/router';
+import styles from './index.module.css';
+import { CardSearchType } from './type';
 
 export default function Card({ product }: CardSearchType) {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function Card({ product }: CardSearchType) {
       className={styles.card}
       role="card"
       onClick={() => {
-        router.push(`/products/${router.query.page}/product?id=${product.id}`);
+        router.push(`/products/${router.query.page}?id=${product.id}`);
       }}
     >
       {product.images ? (

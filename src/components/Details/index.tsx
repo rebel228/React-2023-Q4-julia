@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import styles from "./index.module.css";
-import { useSearchParams } from "next/navigation";
-import { useGetProductQuery } from "../../features/apiSlice";
-import Loader from "../Loader";
-import { useActions } from "../../hooks/actions";
-import { useRouter } from "next/router";
+import { useEffect } from 'react';
+import styles from './index.module.css';
+import { useSearchParams } from 'next/navigation';
+import { useGetProductQuery } from '../../features/apiSlice';
+import Loader from '../Loader';
+import { useActions } from '../../hooks/actions';
+import { useRouter } from 'next/router';
 
 export default function Details() {
   const searchParams = useSearchParams();
@@ -14,7 +14,7 @@ export default function Details() {
     data: dataProduct,
     isLoading,
     isFetching,
-  } = useGetProductQuery(searchParams.get("id"));
+  } = useGetProductQuery(searchParams.get('id'));
 
   useEffect(() => {
     if (!isLoading && !isFetching) {

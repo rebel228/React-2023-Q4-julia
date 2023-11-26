@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { testids } from "../../constants/testids";
-import { useAppSelector } from "../../hooks/redux";
-import { useActions } from "../../hooks/actions";
-import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { testids } from '../../constants/testids';
+import { useAppSelector } from '../../hooks/redux';
+import { useActions } from '../../hooks/actions';
+import { useRouter } from 'next/router';
 
 export default function SearchBar() {
-  const [word, setWord] = useState<string>("");
+  const [word, setWord] = useState<string>('');
   const router = useRouter();
   const searchedWord = useAppSelector((state) => state.search.searchedWord);
   const { setSearchedWord } = useActions();
@@ -16,9 +16,9 @@ export default function SearchBar() {
 
   useEffect(() => {
     setWord(searchedWord);
-    const localStorageSearch = localStorage.getItem("search");
+    const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
-      router.push("/1");
+      router.push('/products/1');
     }
   }, []);
 
@@ -36,7 +36,7 @@ export default function SearchBar() {
       <button
         className="button"
         onClick={() => {
-          router.push("/1");
+          router.push('/products/1');
           search();
         }}
         role="search-button"

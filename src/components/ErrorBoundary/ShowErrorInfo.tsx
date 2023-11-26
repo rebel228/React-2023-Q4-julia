@@ -5,7 +5,7 @@ function ShowErrorInfo() {
   const [showErrorInfo, setShowErrorInfo] = useState<boolean>();
 
   if (showErrorInfo) {
-    throw new Error('Error!');
+    throw Error('Error!');
   }
 
   return (

@@ -1,14 +1,14 @@
-import { IProduct } from "../../types";
-import Loader from "../Loader";
-import Card from "../Card";
-import styles from "./index.module.css";
-import ErrorInfo from "../ErrorBoundary/ErrorInfo";
-import ShowErrorInfo from "../ErrorBoundary/ShowErrorInfo";
-import { useAppSelector } from "../../hooks/redux";
-import { useGetAllProductsQuery } from "../../features/apiSlice";
-import { useEffect } from "react";
-import { useActions } from "../../hooks/actions";
-import { useRouter } from "next/router";
+import { IProduct } from '../../types';
+import Loader from '../Loader';
+import Card from '../Card';
+import styles from './index.module.css';
+import ErrorInfo from '../ErrorBoundary/ErrorInfo';
+import ShowErrorInfo from '../ErrorBoundary/ShowErrorInfo';
+import { useAppSelector } from '../../hooks/redux';
+import { useGetAllProductsQuery } from '../../features/apiSlice';
+import { useEffect } from 'react';
+import { useActions } from '../../hooks/actions';
+import { useRouter } from 'next/router';
 
 export default function SearchResults() {
   const loadingProducts = useAppSelector(
