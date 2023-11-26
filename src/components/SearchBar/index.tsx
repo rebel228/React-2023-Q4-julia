@@ -3,10 +3,11 @@ import { testids } from '../../constants/testids';
 import { useAppSelector } from '../../hooks/redux';
 import { useActions } from '../../hooks/actions';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function SearchBar() {
   const [word, setWord] = useState<string>('');
-  const router = useRouter();
+  const { push } = useRouter();
   const searchedWord = useAppSelector((state) => state.search.searchedWord);
   const { setSearchedWord } = useActions();
 
@@ -18,7 +19,7 @@ export default function SearchBar() {
     setWord(searchedWord);
     const localStorageSearch = localStorage.getItem('search');
     if (localStorageSearch) {
-      router.push('/products/1');
+      push('/products/1');
     }
   }, []);
 
@@ -36,12 +37,18 @@ export default function SearchBar() {
       <button
         className="button"
         onClick={() => {
-          router.push('/products/1');
+          push('/products/1');
           search();
         }}
         role="search-button"
       >
-        <img className="img-search" src="/loupe.svg" />
+        <Image
+          className="img-search"
+          width="30"
+          height="30"
+          alt=""
+          src="/loupe.svg"
+        />
       </button>
     </div>
   );

@@ -1,16 +1,27 @@
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router';
-import RoutingApp from '../services/routing';
+import InvalidRoute from '@/pages/404';
 
-test('should render error', () => {
-  const badRoute = '/bad/route';
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
+    };
+  },
+}));
 
-  render(
-    <MemoryRouter initialEntries={[badRoute]}>
-      <RoutingApp />
-    </MemoryRouter>
-  );
+test('should render 404', () => {
+  render(<InvalidRoute />);
 
   expect(screen.getByText(/404 not found!/i)).toBeInTheDocument();
 });

@@ -17,8 +17,10 @@
   padding: 10px 2px;
 }
 .image {
+  height: 400px;
   width: 100%;
   align-self: center;
+  position: relative;
 }
 .title {
   font-size: 18px;

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import styles from './index.module.css';
 import { CardSearchType } from './type';
+import Image from 'next/image';
 
 export default function Card({ product }: CardSearchType) {
   const router = useRouter();
@@ -14,7 +15,16 @@ export default function Card({ product }: CardSearchType) {
       }}
     >
       {product.images ? (
-        <img className={styles.image} src={product.images[0]} />
+        <div className={styles.image}>
+          <Image
+            fill
+            sizes="100%"
+            style={{ objectFit: 'contain' }}
+            alt=""
+            src={product.images[0]}
+            priority={true}
+          />
+        </div>
       ) : null}
       <div>
         <p className={styles.title}>{product.title}</p>

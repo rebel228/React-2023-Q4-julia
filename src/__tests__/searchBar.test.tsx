@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import SearchBar from '../components/SearchBar';
 import { fireEvent, render } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { testids } from '../constants/testids';
 import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
@@ -9,6 +8,24 @@ import { store } from '../store';
 
 const testInputValue = 'test';
 const mockLocalStorage: Record<string, string> = {};
+
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
+    };
+  },
+}));
 
 function Wrapper({ children }: PropsWithChildren): JSX.Element {
   return <Provider store={store}>{children}</Provider>;
@@ -27,9 +44,7 @@ beforeEach(() => {
 test('search button saves the entered value to the local storage', async () => {
   const { getByRole, getByTestId } = render(
     <Wrapper>
-      <Router>
-        <SearchBar />
-      </Router>
+      <SearchBar />
     </Wrapper>
   );
   const searchInput = getByTestId(testids.searchInput) as HTMLInputElement;
@@ -45,9 +60,7 @@ test('component retrieves the value from the local storage upon mounting', async
   window.localStorage.getItem = () => testInputValue;
   const { getByTestId } = render(
     <Wrapper>
-      <Router>
-        <SearchBar />
-      </Router>
+      <SearchBar />
     </Wrapper>
   );
   const searchInput = getByTestId(testids.searchInput) as HTMLInputElement;

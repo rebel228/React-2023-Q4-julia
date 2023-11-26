@@ -5,6 +5,7 @@ import { useGetProductQuery } from '../../features/apiSlice';
 import Loader from '../Loader';
 import { useActions } from '../../hooks/actions';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Details() {
   const searchParams = useSearchParams();
@@ -41,7 +42,16 @@ export default function Details() {
           {dataProduct ? (
             <div className={styles.card}>
               {dataProduct.images ? (
-                <img className={styles.image} src={dataProduct.images[0]} />
+                <div className={styles.image}>
+                  <Image
+                    fill
+                    sizes="100%"
+                    style={{ objectFit: 'contain' }}
+                    alt=""
+                    src={dataProduct.images[0]}
+                    priority={true}
+                  />
+                </div>
               ) : null}
 
               <div>

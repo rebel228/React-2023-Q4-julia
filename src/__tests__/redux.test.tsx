@@ -6,8 +6,18 @@ import '@testing-library/jest-dom';
 
 import { store } from '../store';
 import { useGetAllProductsQuery } from '../features/apiSlice';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from '../App';
+import SearchPage from '@/pages/products/[page]';
+
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '',
+      pathname: '',
+      query: '',
+      asPath: '',
+    };
+  },
+}));
 
 function wrapper({ children }: { children: ReactNode }) {
   return <Provider store={store}>{children}</Provider>;
@@ -63,9 +73,7 @@ describe('useGetAllProductsQuery', () => {
   it('the card component renders the relevant card data', async () => {
     const { getByText } = render(
       <WrapperComponent>
-        <Router>
-          <App />
-        </Router>
+        <SearchPage />
       </WrapperComponent>
     );
     const { result } = renderHook(

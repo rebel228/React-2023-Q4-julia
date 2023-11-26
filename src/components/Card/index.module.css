@@ -18,7 +18,9 @@
 
 .image {
   height: 110px;
+  width: 100%;
   align-self: center;
+  position: relative;
 }
 .title {
   font-size: 18px;

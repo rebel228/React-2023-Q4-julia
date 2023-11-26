@@ -1,6 +1,11 @@
-module.exports = {
-  preset: 'ts-jest',
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({ dir: './' });
+
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
+  preset: 'ts-jest',
   verbose: true,
   extensionsToTreatAsEsm: ['.jsx, .tsx, .ts'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
@@ -9,5 +14,6 @@ module.exports = {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
   },
   automock: false,
-  setupFiles: ['./src/setupTests.ts'],
 };
+
+module.exports = createJestConfig(customJestConfig);
